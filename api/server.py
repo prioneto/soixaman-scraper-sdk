@@ -4,13 +4,25 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
 import os
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 app = Flask(__name__)
 
 
 def scrape_matches():
-    # Set up Selenium WebDriver
-    driver = webdriver.Chrome()
+    # Explicitly set the path to chromedriver
+    chrome_driver_path = "/usr/bin/chromedriver"
+
+    # Set up Chrome options
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Run in headless mode
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+
+    # Specify the service for chromedriver
+    service = Service(chrome_driver_path)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
     # URL of the target page
     url = 'https://www.stoiximan.gr/sport/podosfairo/ellada/stoiximan-super-league/1636/'
