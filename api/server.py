@@ -8,8 +8,19 @@ app = Flask(__name__)
 
 
 def scrape_matches():
-    # Set up Selenium WebDriver
-    driver = webdriver.Chrome()
+
+    chrome_driver_path = "./chromedriver-mac-arm64"
+
+    # Set up Selenium WebDriver options for headless mode
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+
+    # Initialize WebDriver with the specified chromedriver path and options
+    service = Service(chrome_driver_path)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
     # URL of the target page
     url = 'https://www.stoiximan.gr/sport/podosfairo/diorganoseis/agglia/1/'
