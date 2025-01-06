@@ -1,1 +1,0 @@
-web: sh install.sh && python api/server.py
