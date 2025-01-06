@@ -4,10 +4,13 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
 
+import chromedriver_autoinstaller
+
 app = Flask(__name__)
 
 
 def scrape_matches():
+    chromedriver_autoinstaller.install()
     # Set up Selenium WebDriver
     driver = webdriver.Chrome()
 
