@@ -4,21 +4,12 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
 
-import chromedriver_autoinstaller
-
 app = Flask(__name__)
 
 
 def scrape_matches():
-    chromedriver_autoinstaller.install()
-    # Set up Selenium WebDriver with Chrome binary location
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.binary_location = "/usr/bin/google-chrome"  # Adjust this path as needed
-
-    driver = webdriver.Chrome(options=options)
+    # Set up Selenium WebDriver
+    driver = webdriver.Chrome()
 
     # URL of the target page
     url = 'https://www.stoiximan.gr/sport/podosfairo/diorganoseis/agglia/1/'
@@ -127,5 +118,4 @@ if __name__ == '__main__':
 
 
 # Export the app for serverless function
-def handler(event, context):
-    return app(event, context)
+app = app
