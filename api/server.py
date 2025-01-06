@@ -3,14 +3,13 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
-from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from vercel_python_bridge import make_lambda
 
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
-
 
 app = Flask(__name__)
 
@@ -125,8 +124,8 @@ def scrape_endpoint():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
 # Export the app for serverless function
+
+
 def handler(event, context):
-    from vercel_python_bridge import make_lambda
     return make_lambda(app)(event, context)
