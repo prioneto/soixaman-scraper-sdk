@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 def scrape_matches():
 
-    chrome_driver_path = "./chromedriver-mac-arm64"
+    chrome_driver_path = "./chromedriver"
 
     # Set up Selenium WebDriver options for headless mode
     chrome_options = Options()
