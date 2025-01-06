@@ -5,13 +5,14 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import time
+import chromedriver_autoinstaller
 
 app = Flask(__name__)
 
 
 def scrape_matches():
-
-    chrome_driver_path = "./chromedriver"
+    # Automatically install the correct version of ChromeDriver
+    chromedriver_autoinstaller.install()
 
     # Set up Selenium WebDriver options for headless mode
     chrome_options = Options()
@@ -20,9 +21,8 @@ def scrape_matches():
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-    # Initialize WebDriver with the specified chromedriver path and options
-    service = Service(chrome_driver_path)
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    # Initialize WebDriver with the specified options
+    driver = webdriver.Chrome(options=chrome_options)
 
     # URL of the target page
     url = 'https://www.stoiximan.gr/sport/podosfairo/diorganoseis/agglia/1/'
@@ -128,7 +128,6 @@ def scrape_endpoint():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 # Export the app for serverless function
 app = app
